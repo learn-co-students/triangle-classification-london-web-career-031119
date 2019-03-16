@@ -10,20 +10,15 @@ class Triangle
   end
   def kind
     if @a <= 0 || @b <= 0 || @c <= 0 || @a + @b <= @c || @b + @c <= @a || @a + @c <= @b
-      triangle_error
+      begin
+        raise TriangleError
+      end
     elsif @a == @b && @b == @c
       :equilateral
     elsif @a == @b || @a == @c || @b == @c
       :isosceles
-    elsif @a + @b > @c || @b + @c > @a || @a + @c > @b
+    else @a + @b > @c || @b + @c > @a || @a + @c > @b
        :scalene
-    else
-      triangle_error
-    end
-  end
-  def triangle_error
-    begin
-      raise TriangleError
     end
   end
   class TriangleError < StandardError
